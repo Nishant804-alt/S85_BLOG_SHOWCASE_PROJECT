@@ -1,17 +1,21 @@
 const mongoose = require("mongoose");
-require("dotenv").config();
 
 const connectDatabase = () => {
-  mongoose
-    .connect(process.env.DB_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
+  const mongoURI = process.env.DB_URL;
+  if (!mongoURI) {
+    console.error("❌ MongoDB URI is undefined. Check your .env file.");
+    process.exit(1);
+  }
+
+  mongoose.connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
     .then((data) => {
-      console.log(`MongoDB connected: ${data.connection.host}`);
+      console.log(`✅ MongoDB Connected: ${data.connection.host}`);
     })
     .catch((err) => {
-      console.error("MongoDB connection error:", err);
+      console.error("❌ MongoDB connection failed:", err);
       process.exit(1);
     });
 };
