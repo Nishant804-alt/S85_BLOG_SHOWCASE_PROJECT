@@ -6,23 +6,23 @@ function App() {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/blogs")
+    fetch("http://localhost:3000/api/blogs")
       .then((res) => res.json())
       .then((data) => setBlogs(data))
       .catch((err) => console.error("Error fetching blogs:", err));
   }, []);
 
-  const handleNewPost = (newBlog) => {
-    setBlogs((prev) => [newBlog, ...prev]); // Add on top
+  const addBlogToList = (newBlog) => {
+    setBlogs([newBlog, ...blogs]);
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10">
-      <h1 className="text-3xl text-center font-bold mb-6 text-purple-800">
+    <div className="min-h-screen bg-gray-100 py-10 px-4">
+      <h1 className="text-4xl font-bold text-center mb-10 text-purple-800">
         Blogify - Live Blogs from MongoDB
       </h1>
 
-      <BlogForm onPost={handleNewPost} />
+      <BlogForm onAddBlog={addBlogToList} />
 
       {blogs.length > 0 ? (
         blogs.map((blog) => (
