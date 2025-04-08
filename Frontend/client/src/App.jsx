@@ -1,63 +1,23 @@
-import "./App.css";
+// client/src/App.jsx
+
+import React from 'react';
+import BlogPost from './components/BlogPost';
 
 function App() {
+  const dummyBlog = {
+    title: "Why I Built Blogify 🚀",
+    content:
+      "Blogify is a blogging platform built during the ASAP program. It allows users to create, read, update, and delete blog posts with ease!",
+    author: "Nishant",
+    date: "2025-04-07",
+  };
+
   return (
-    <div className="App" style={styles.container}>
-      <h1 style={styles.title}>🚀 ASAP Project - Blogify</h1>
-      <p style={styles.tagline}>
-        A modern blog platform to write, read, and share stories in real-time.
-      </p>
-
-      <section style={styles.section}>
-        <h2>💡 Why Blogify?</h2>
-        <p>
-          Blogify is your go-to platform for sharing thoughts, tutorials, or ideas.
-          It supports markdown, comments, user profiles, and a smooth writing experience.
-        </p>
-      </section>
-
-      <section style={styles.section}>
-        <h2>🛠 Features</h2>
-        <ul>
-          <li>Create, read, update, and delete blog posts</li>
-          <li>Comment system</li>
-          <li>MongoDB + Express backend</li>
-          <li>Simple and clean UI</li>
-        </ul>
-      </section>
-
-      <footer style={styles.footer}>
-        Built with ❤️ by Nishant
-      </footer>
+    <div className="min-h-screen bg-gray-100 py-10">
+      <h1 className="text-3xl text-center font-bold mb-6 text-purple-800">Welcome to Blogify</h1>
+      <BlogPost {...dummyBlog} />
     </div>
   );
 }
-
-const styles = {
-  container: {
-    fontFamily: "sans-serif",
-    padding: "2rem",
-    textAlign: "center",
-  },
-  title: {
-    fontSize: "2.5rem",
-    marginBottom: "1rem",
-  },
-  tagline: {
-    fontSize: "1.2rem",
-    color: "#666",
-  },
-  section: {
-    marginTop: "2rem",
-    textAlign: "left",
-    maxWidth: "600px",
-    margin: "2rem auto",
-  },
-  footer: {
-    marginTop: "4rem",
-    fontSize: "0.9rem",
-    color: "#888",
-  },
-};
 
 export default App;
