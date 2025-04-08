@@ -1,41 +1,77 @@
+📝 Blogify: A MERN-based Blog Platform
+🚀 Deployment
+Frontend Live Site: https://blogify-asap.pages.dev
 
-## Deployment link :-
-- **project link:** [https://blogify-asap.pages.dev]
+Backend API (Render): https://s85-blog-showcase-project-3.onrender.com/ping
 
-## Deployment Details
-- **Render Project Link:** [https://s85-blog-showcase-project-3.onrender.com/ping]
-- **Date:** [2025-01-07]
-- **Status:** Successfully deployed / Encountered issues (modify accordingly)
+📖 Project Overview
+Blogify is a full-stack blogging platform built using the MERN stack. It allows users to write, edit, and manage blogs, while also enabling readers to explore, like, and comment on them. The platform features user authentication, a rich-text editor, category-based filtering, and admin-level moderation tools.
 
-## Steps Followed
-1. **Logged into Render**
-   - Opened [Render](https://render.com/)
-   - Navigated to the dashboard
-   
-2. **Created a New Web Service**
-   - Selected **New Web Service**
-   - Connected GitHub repository
-   - Chose the repository for the Gym Management System
-   
-3. **Configured Deployment Settings**
-   - **Runtime:** Node.js
-   - **Region:** (Selected preferred region)
-   - **Build Command:**
-    
-     npm install
-    
-   - **Start Command:**
-     node server.js
-  
+✨ Features
+👤 User Features
+🛡️ Authentication
+Signup/Login using JWT-based authentication
 
-   - Selected the appropriate branch (`main`)
+Secure user sessions
 
-4. **Deployed the Service**
-   - Clicked **Deploy**
-   - Monitored build logs for any errors
-   - Verified that the application started successfully
+Profile management (username, bio, profile picture)
 
-## Issues Faced & Fixes
-- [there was issue in package.json]
-  
-**Author:** Nishant
+✍️ Blog Management
+Create, edit, delete blogs
+
+Add categories and tags to organize posts
+
+WYSIWYG (rich-text) editor for writing blogs
+
+🔍 Content Browsing
+View a list of all blogs
+
+Filter blogs by categories or tags
+
+Search blogs by title or content
+
+💬 Engagement
+Like and comment on blogs
+
+View nested comment threads
+
+🛠️ Admin Features
+👥 User Management
+View and manage user accounts
+
+Suspend or delete accounts
+
+🚨 Content Moderation
+Approve or delete flagged blogs or comments
+
+🧰 Tech Stack
+🔹 Frontend
+React.js – UI library
+
+Vite – Fast build tool
+
+TailwindCSS – Utility-first CSS framework
+
+React Router – Client-side routing
+
+Quill.js / Draft.js – Rich-text editing
+
+🔸 Backend
+Node.js – Runtime environment
+
+Express.js – Web framework for APIs
+
+JWT – Authentication
+
+Mongoose – MongoDB object modeling
+
+🗄️ Database
+MongoDB (MongoDB Atlas) – Document-based database
+
+🧩 Other Tools & Libraries
+Cloudinary – Image upload and storage (blog images, profile pictures)
+
+Nodemailer – Email notifications (optional)
+
+Formik & Yup – Form handling and validation
+
