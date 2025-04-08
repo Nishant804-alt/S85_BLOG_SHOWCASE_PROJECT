@@ -37,4 +37,4 @@
 ## Issues Faced & Fixes
 - [there was issue in package.json]
   
-**Author:** Madhav Garg
+**Author:** Nishant
