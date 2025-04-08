@@ -1,5 +1,6 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+
 const {
   createBlog,
   getAllBlogs,
@@ -7,16 +8,19 @@ const {
   updateBlog,
   deleteBlog,
   connectionStatus,
-} = require('./controllers/blogController');
+} = require("../controllers/blogController");
+
+const blogValidationRules = require("../validators/blogValidator");
+const handleValidation = require("../validators/handleValidation");
 
 // Home route: returns DB connection status
-router.get('/', connectionStatus);
+router.get("/", connectionStatus);
 
-// CRUD Routes
-router.post('/blogs', createBlog);
-router.get('/blogs', getAllBlogs);
-router.get('/blogs/:id', getBlogById);
-router.put('/blogs/:id', updateBlog);
-router.delete('/blogs/:id', deleteBlog);
+// CRUD Routes with validation
+router.post("/blogs", blogValidationRules, handleValidation, createBlog);
+router.put("/blogs/:id", blogValidationRules, handleValidation, updateBlog);
+router.get("/blogs", getAllBlogs);
+router.get("/blogs/:id", getBlogById);
+router.delete("/blogs/:id", deleteBlog);
 
 module.exports = router;
