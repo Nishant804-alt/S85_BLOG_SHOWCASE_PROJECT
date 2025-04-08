@@ -1,5 +1,6 @@
 
-
+## Deployment link :-
+- **project link:** [https://blogify-asap.pages.dev]
 
 ## Deployment Details
 - **Render Project Link:** [https://s85-blog-showcase-project-3.onrender.com/ping]
