@@ -1,15 +1,57 @@
-# 🚀 ASAP Blog Showcase – MongoDB Connection Milestone
+Project Title:
+Blogify: A MERN-based Blog Platform
 
-This milestone integrates MongoDB with the backend Express server using Mongoose and updates the home route to show the database connection status.
+Project Overview:
+Blogify is a full-stack blogging application where users can create, edit, and publish blogs. Readers can browse blogs, leave comments, and like their favorite articles. The app supports user authentication, rich text editing, and categories/tags for better organization.
 
----
+Features:
+User Features:
+User Authentication:
 
-## ✅ Task Overview
+Signup/Login with JWT-based authentication.
+Profile management (username, bio, profile picture).
+Blog Management:
 
-- [x] Create a branch with a meaningful name
-- [x] Add MongoDB client code (`mongoose` connection)
-- [x] Use `.env` for MongoDB URI
-- [x] Show DB connection status on the home (`/`) route
-- [x] Commit & push the branch to GitHub
-- [x] Create a Pull Request
-- [x] Request AI review in PR comments using:  
+Create, edit, and delete blogs.
+Add categories and tags to blogs for better organization.
+WYSIWYG (rich-text) editor for writing blogs.
+Content Browsing:
+
+View a list of all blogs.
+Filter blogs by categories or tags.
+Search blogs by title or content.
+Engagement:
+
+Like and comment on blogs.
+View comment threads.
+Admin Features:
+User Management:
+
+View and manage user accounts.
+Suspend/delete accounts.
+Content Moderation:
+
+Approve or delete flagged blogs or comments.
+Tech Stack:
+
+Frontend:
+React: For the user interface.
+Vite: For a fast build setup.
+React Router: For navigation.
+TailwindCSS: For responsive and elegant UI.
+Quill.js or Draft.js: For rich-text editing.
+
+Backend:
+Node.js: Server-side runtime.
+Express.js: For building REST APIs.
+Mongoose: MongoDB object modeling for Node.js.
+JWT: For authentication.
+
+Database:
+MongoDB: To store blog posts, user data, comments, and likes.
+
+Other Tools:
+Cloudinary: For uploading and storing images (e.g., blog cover images).
+MongoDB Atlas: Cloud-hosted MongoDB.
+Nodemailer: For email notifications (optional).
+Formik/Yup: For form validation.
