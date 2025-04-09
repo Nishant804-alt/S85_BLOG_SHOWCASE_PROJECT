@@ -1,0 +1,17 @@
+<!-- views/home.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Blogify - Home</title>
+</head>
+<body>
+  <h1>Welcome to Blogify!</h1>
+  <p>Number of blogs: <%= blogs.length %></p>
+  <ul>
+    <% blogs.forEach(blog => { %>
+      <li><strong><%= blog.title %></strong>: <%= blog.content %></li>
+    <% }); %>
+  </ul>
+</body>
+</html>
