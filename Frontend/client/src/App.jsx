@@ -1,44 +1,30 @@
-import React, { useEffect, useState } from "react";
-import BlogPost from "./components/BlogPost";
-import BlogForm from "./components/BlogForm";
+import "./App.css";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home.jsx";
+import CreateBlog from "./pages/CreateBlog.jsx";
+// import SignUp from "./pages/SignUp.jsx";
+// import SignIn from "./pages/SignIn.jsx";
+import Contact from "./pages/Contact.jsx";
+import Blog from "./pages/Blog.jsx";
+import Blogs from "./pages/Blogs.jsx";
+import DeleteBlog from "./pages/DeleteBlog.jsx";
+import EditBlog from "./pages/EditBlog.jsx";
 
-function App() {
-  const [blogs, setBlogs] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:3000/api/blogs")
-      .then((res) => res.json())
-      .then((data) => setBlogs(data))
-      .catch((err) => console.error("Error fetching blogs:", err));
-  }, []);
-
-  const addBlogToList = (newBlog) => {
-    setBlogs([newBlog, ...blogs]);
-  };
-
+const App = () => {
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4">
-      <h1 className="text-4xl font-bold text-center mb-10 text-purple-800">
-        Blogify - Live Blogs from MongoDB
-      </h1>
-
-      <BlogForm onAddBlog={addBlogToList} />
-
-      {blogs.length > 0 ? (
-        blogs.map((blog) => (
-          <BlogPost
-            key={blog._id}
-            title={blog.title}
-            content={blog.content}
-            author={blog.author}
-            date={blog.createdAt}
-          />
-        ))
-      ) : (
-        <p className="text-center text-gray-600">Loading blogs...</p>
-      )}
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/blogs" element={<Blogs />} />
+      <Route path="/blogs/create" element={<CreateBlog />} />
+      <Route path="/edit/blog/:id" element={<EditBlog />} />
+      <Route path="/delete/blog/:id" element={<DeleteBlog />} />
+      {/* <Route path="/register" element={<SignUp />} />
+      <Route path="/login" element={<SignIn />} /> */}
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/blog/:id" element={<Blog />} />
+    </Routes>
   );
-}
+};
 
 export default App;

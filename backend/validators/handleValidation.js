@@ -1,4 +1,5 @@
-const { validationResult } = require("express-validator");
+// validators/handleValidation.js
+import { validationResult } from "express-validator";
 
 const handleValidation = (req, res, next) => {
   const errors = validationResult(req);
@@ -8,4 +9,4 @@ const handleValidation = (req, res, next) => {
   next();
 };
 
-module.exports = handleValidation;
+export default handleValidation;
