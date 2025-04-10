@@ -61,25 +61,25 @@ const Footer = () => {
             <h4 className="text-xl font-semibold mb-4">Follow Us</h4>
             <div className="flex space-x-4">
               <a
-                href="https://www.facebook.com/mr.abdulwahab.aw/"
+                href=""
                 className="text-white hover:text-primaryColor"
               >
                 <BsFacebook className="w-6 h-6" />
               </a>
               <a
-                href="https://www.instagram.com/mr.abdulwahab.aw/"
+                href=""
                 className="text-white hover:text-primaryColor"
               >
                 <BsInstagram className="w-6 h-6" />
               </a>
               <a
-                href="https://www.linkedin.com/in/abdul-wahab-aw/"
+                href="https://www.linkedin.com/in/nishant-a18b7b323?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                 className="text-white hover:text-primaryColor"
               >
                 <BsLinkedin className="w-6 h-6" />
               </a>
               <a
-                href="https://github.com/abdul-wahab619"
+                href="https://github.com/Nishant804-alt"
                 className="text-white hover:text-primaryColor"
               >
                 <BsGithub className="w-6 h-6" />

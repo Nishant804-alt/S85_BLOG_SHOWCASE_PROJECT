@@ -16,8 +16,14 @@ const EditBlog = () => {
   const [body, setBody] = useState("");
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+
     axios
-      .get(`http://localhost:3000/blogs/edit/${id}`)
+      .get(`http://localhost:3000/blogs/edit/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // ✅ Add token to headers
+        },
+      })
       .then((res) => {
         setCoverImageUrl(res.data.coverImageUrl);
         setTitle(res.data.title);
@@ -25,8 +31,12 @@ const EditBlog = () => {
       })
       .catch((err) => {
         console.log(err);
+        if (err.response && err.response.status === 401) {
+          enqueueSnackbar("Unauthorized. Please login again.", { variant: "warning" });
+          navigate("/login");
+        }
       });
-  }, [id]);
+  }, [id, enqueueSnackbar, navigate]);
 
   const handleEditBlog = (e) => {
     e.preventDefault();
@@ -39,8 +49,15 @@ const EditBlog = () => {
       formData.append("coverImage", coverImageFile);
     }
 
+    const token = localStorage.getItem("token");
+
     axios
-      .put(`http://localhost:3000/blogs/${id}`, formData)
+      .put(`http://localhost:3000/blogs/${id}`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`, // ✅ Add token here as well
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then(() => {
         enqueueSnackbar("Blog edited successfully", { variant: "success" });
         navigate("/");
@@ -65,10 +82,7 @@ const EditBlog = () => {
           <h2 className="text-2xl font-bold mb-6">Edit Blog</h2>
           <form onSubmit={handleEditBlog} encType="multipart/form-data">
             <div className="mb-4">
-              <label
-                htmlFor="coverImage"
-                className="block text-xl font-medium text-gray-700"
-              >
+              <label htmlFor="coverImage" className="block text-xl font-medium text-gray-700">
                 Cover Image
               </label>
               <input
@@ -76,21 +90,13 @@ const EditBlog = () => {
                 onChange={handleImageChange}
                 id="coverImage"
                 name="coverImage"
-                aria-describedby="coverImage"
               />
               {coverImageUrl && (
-                <img
-                  className="h-full w-full mt-2"
-                  src={coverImageUrl}
-                  alt="cover"
-                />
+                <img className="h-full w-full mt-2" src={coverImageUrl} alt="cover" />
               )}
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="title"
-                className="block text-xl font-medium text-gray-700"
-              >
+              <label htmlFor="title" className="block text-xl font-medium text-gray-700">
                 Title
               </label>
               <input
@@ -100,14 +106,10 @@ const EditBlog = () => {
                 onChange={(e) => setTitle(e.target.value)}
                 id="title"
                 name="title"
-                aria-describedby="title"
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="body"
-                className="block text-xl font-medium text-gray-700"
-              >
+              <label htmlFor="body" className="block text-xl font-medium text-gray-700">
                 Body
               </label>
               <textarea
