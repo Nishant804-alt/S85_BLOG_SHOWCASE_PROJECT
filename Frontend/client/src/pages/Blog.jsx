@@ -11,12 +11,15 @@ const Blog = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
 
-  // Fetch blog data based on the blog ID
+  const token = localStorage.getItem("token"); // Get JWT token from localStorage
+
   useEffect(() => {
     const fetchBlogData = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/blogs/${id}`, {
-          withCredentials: true, // Ensure cookies are sent
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
         setBlog(response.data.blog);
         setComments(response.data.comments);
@@ -25,43 +28,37 @@ const Blog = () => {
       }
     };
     fetchBlogData();
-  }, [id]);
+  }, [id, token]);
 
-  // Handle the form submission for comments
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
         `http://localhost:3000/blogs/comment/${blog._id}`,
+        { content: newComment },
         {
-          content: newComment,
-        },
-        {
-          withCredentials: true, // Ensure cookies are sent
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
       setComments([...comments, response.data.comment]);
       setNewComment("");
-
-      // Redirect back to the same blog page after adding comment
-      navigate(`/blog/${id}`);
+      navigate(`/blog/${id}`); // Refresh route
     } catch (error) {
       console.error("Error adding comment:", error);
     }
   };
 
-  if (!blog) {
-    return <p>Loading...</p>;
-  }
+  if (!blog) return <p>Loading...</p>;
 
   return (
     <>
       <Navbar />
       <div className="container p-4 mx-auto my-10 mt-24">
         <div className="max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-md">
-          {/* Blog cover image */}
           <img
-            src={`http://localhost:3000/uploads/${blog.coverImageUrl}`} // Use the correct path for the image
+            src={`http://localhost:3000/uploads/${blog.coverImageUrl}`}
             className="object-cover w-full h-96"
             alt="Blog cover"
           />
@@ -70,6 +67,7 @@ const Blog = () => {
             <p className="text-lg text-gray-700">{blog.body}</p>
           </div>
         </div>
+
         <div className="mt-10">
           <h2 className="mb-4 text-2xl font-bold">
             Comments - ({comments.length})
@@ -90,20 +88,19 @@ const Blog = () => {
               Add Comment
             </button>
           </form>
+
           <div>
             {comments.map((comment) => (
               <div key={comment._id} className="mb-4">
                 <div className="flex items-center mb-2">
                   <img
-                    src="default-user-image.jpg" // Example for user profile image
+                    src="default-user-image.jpg"
                     alt="User"
                     className="w-10 h-10 mr-4 rounded-full"
                   />
                   <div>
                     <p className="font-bold">
-                      {comment.createdBy && comment.createdBy.fullName
-                        ? comment.createdBy.fullName
-                        : "Anonymous"}
+                      {comment.createdBy?.fullName || "Anonymous"}
                     </p>
                   </div>
                 </div>

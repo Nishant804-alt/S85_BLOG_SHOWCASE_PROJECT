@@ -8,16 +8,22 @@ const DeleteBlog = () => {
   const { id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleDeleteBook = () => {
+  const handleDeleteBlog = () => {
+    const token = localStorage.getItem("token"); 
+
     axios
-      .delete(`http://localhost:3000/blogs/${id}`)
+      .delete(`http://localhost:3000/blogs/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then(() => {
-        enqueueSnackbar("Book Deleted successfully", { variant: "success" });
+        enqueueSnackbar("Blog deleted successfully", { variant: "success" });
         navigate("/");
       })
       .catch((err) => {
-        enqueueSnackbar("Error", { variant: "error" });
-        console.log(err);
+        enqueueSnackbar("Failed to delete blog", { variant: "error" });
+        console.error("Delete error:", err);
       });
   };
 
@@ -28,7 +34,7 @@ const DeleteBlog = () => {
         <h3 className="text-2xl">Are you sure you want to delete this?</h3>
         <button
           className="p-4 bg-red-600 text-white m-8 w-full"
-          onClick={handleDeleteBook}
+          onClick={handleDeleteBlog}
         >
           Yes, Delete it
         </button>

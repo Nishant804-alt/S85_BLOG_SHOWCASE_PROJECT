@@ -9,17 +9,23 @@ const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
- 
 
   useEffect(() => {
     const fetchBlogs = async () => {
+      const token = localStorage.getItem("token"); // ✅ Get token from localStorage
+
       try {
-        const response = await axios.get("http://localhost:3000/blogs");
-        setBlogs(response.data.data); // Assuming `data` is an object with a `data` property containing the array of blogs
+        const response = await axios.get("http://localhost:3000/blogs", {
+          headers: {
+            Authorization: `Bearer ${token}`, // ✅ Add token to Authorization header
+          },
+        });
+        setBlogs(response.data.data); // Assuming response.data has a 'data' array
       } catch (error) {
         console.error("Error fetching blogs:", error);
       }
     };
+
     fetchBlogs();
   }, []);
 
@@ -30,7 +36,7 @@ const Blogs = () => {
   const filteredBlogs = blogs.filter((blog) =>
     blog.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
- 
+
   return (
     <>
       <Navbar />
@@ -48,7 +54,6 @@ const Blogs = () => {
         <hr className="mt-2 mb-4 ml-[43%] items-center border-b-4 w-44"/>
       </div>
       <div className="container grid grid-cols-1 gap-10 px-4 mx-auto md:grid-cols-2 lg:grid-cols-3">
-     
         {filteredBlogs.map((blog) => (
           <div
             key={blog._id}
@@ -63,13 +68,13 @@ const Blogs = () => {
               </Link>
             </div>
             <img
-              src= {`http://localhost:3000/public${blog.coverImageUrl}`}
+              src={`http://localhost:3000/${blog.coverImageUrl}`}
               className="object-cover w-full h-48 rounded-lg card-img-top"
               alt="Blog cover"
             />
             <div className="p-4 card-body">
               <h5 className="mb-2 text-2xl font-bold card-title">
-               {blog.title}
+                {blog.title}
               </h5>
               <button
                 onClick={() => navigate(`/blog/${blog._id}`)}
